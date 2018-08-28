@@ -15,25 +15,55 @@ import org.springframework.util.CollectionUtils;
  * 审批实例
  */
 public class ProcessInstanceInputVO {
+    /**
+     * 审批人列表
+     */
     private String approvers;
 
+    /**
+     * 抄送人列表
+     */
     private String ccList;
 
+    /**
+     * 抄送时机
+     */
     private String ccPosition;
 
+    /**
+     * 审批发起人部门id
+     */
     private Long deptId;
 
+    /**
+     * 单行输入框、多行输入框的表单数据
+     */
     private List<TextForm> textForms;
 
+    /**
+     * 图片表单数据
+     */
     private List<PictureForm> pictureForms;
 
+    /**
+     * 明细表单数据
+     */
     private List<DetailForm> detailForms;
 
+    /**
+     * 审批发起人
+     */
     private String originatorUserId;
 
     public static class TextForm {
+        /**
+         * 表单控件名称
+         */
         private String name;
 
+        /**
+         * 表单值
+         */
         private String value;
 
         public String getName() {
@@ -54,8 +84,14 @@ public class ProcessInstanceInputVO {
     }
 
     public static class PictureForm {
+        /**
+         * 表单控件名称
+         */
         private String name;
 
+        /**
+         * 表单值，数组格式
+         */
         private List<String> value;
 
         public String getName() {
@@ -76,10 +112,19 @@ public class ProcessInstanceInputVO {
     }
 
     public static class DetailForm {
+        /**
+         * 表单控件名称
+         */
         private String name;
 
+        /**
+         * 明细里的文本控件列表
+         */
         private List<TextForm> textForms;
 
+        /**
+         * 明细里的图片控件列表
+         */
         private List<PictureForm> pictureForms;
 
         public String getName() {
@@ -171,6 +216,10 @@ public class ProcessInstanceInputVO {
         this.originatorUserId = originatorUserId;
     }
 
+    /**
+     * 生成FormComponentValueVo，用于调用发起审批实例的接口
+     * @return
+     */
     public List<FormComponentValueVo> generateForms() {
         List<FormComponentValueVo> result = new ArrayList<>();
         if (!CollectionUtils.isEmpty(textForms)) {
