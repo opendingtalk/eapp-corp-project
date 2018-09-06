@@ -5,17 +5,17 @@ package com.config;
  */
 public class Constant {
     /**
-     * 企业corpid
+     * 企业corpid, 需要修改成开发者所在企业
      */
-    public static final String CORP_ID = "ding7536bfee6fb1fa5a35c2f4657eb6378f";
+    public static final String CORP_ID = "ding7536bfee6f";
     /**
      * 应用的AppKey，登录开发者后台，点击应用管理，进入应用详情可见
      */
-    public static final String APPKEY = "dingklq6qbulyunburur";
+    public static final String APPKEY = "dingklq";
     /**
      * 应用的AppSecret，登录开发者后台，点击应用管理，进入应用详情可见
      */
-    public static final String APPSECRET = "B7Rjq7sK91jOSXV7g6WOZZqEqPxIOE6d7ddh3P0cq80MuDNrT-Clo9mT1-wojlBz";
+    public static final String APPSECRET = "B7Rjq7sK91jOSXV7g6WOZZqEqPxIOE6d7ddh3";
 
     /**
      * 回调URL加解密用。应用的数据加密密钥，登录开发者后台，点击应用管理，进入应用详情可见
@@ -30,10 +30,10 @@ public class Constant {
     /**
      * 应用的agentdId，登录开发者后台可查看
      */
-    public static final Long AGENTID = 189051819L;
+    public static final Long AGENTID = 111L;
 
     /**
-     * 审批模板唯一标识
+     * 审批模板唯一标识，可以在审批管理后台找到
      */
-    public static final String PROCESS_CODE = "PROC-FF6YRLE1N2-K7AKDC6AVAFCM191SE7O1-71CDKV1J-V";
+    public static final String PROCESS_CODE = "PROC-FF6YRLE1N2-K7AKDC6AVAFCM";
 }
