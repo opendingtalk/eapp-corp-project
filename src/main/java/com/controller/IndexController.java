@@ -64,6 +64,10 @@ public class IndexController {
 		OapiUserGetResponse userProfile = getUserProfile(accessToken, userId);
 		String userName = userProfile.getName();
 		Long deptId = userProfile.getDepartment().get(0);
+		// 审批里的部门id，1和-1要互相转换一下
+		if (deptId.longValue() == 1L) {
+			deptId = -1L;
+		}
 		//返回结果
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("userId", userId);
