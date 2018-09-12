@@ -30,4 +30,15 @@ public class URLConstant {
      * 发送企业通知消息的接口url
      */
     public static final String MESSAGE_ASYNCSEND = "https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2";
+
+    /**
+     * 删除企业回调接口url
+     */
+    public static final String DELETE_CALLBACK = "https://oapi.dingtalk.com/call_back/delete_call_back";
+
+    /**
+     * 注册企业回调接口url
+     */
+    public static final String REGISTER_CALLBACK = "https://oapi.dingtalk.com/call_back/register_call_back";
+
 }

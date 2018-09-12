@@ -4,8 +4,17 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import com.config.Constant;
+import com.config.URLConstant;
+import com.dingtalk.api.DefaultDingTalkClient;
+import com.dingtalk.api.DingTalkClient;
+import com.dingtalk.api.request.OapiCallBackDeleteCallBackRequest;
+import com.dingtalk.api.request.OapiCallBackGetCallBackRequest;
+import com.dingtalk.api.request.OapiCallBackRegisterCallBackRequest;
+import com.dingtalk.api.response.OapiCallBackDeleteCallBackResponse;
+import com.dingtalk.api.response.OapiCallBackRegisterCallBackResponse;
 import com.dingtalk.oapi.lib.aes.DingTalkEncryptor;
 import com.dingtalk.oapi.lib.aes.Utils;
+import com.util.AccessTokenUtil;
 import com.util.MessageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -88,5 +98,25 @@ public class CallbackController {
             return null;
         }
 
+    }
+
+    public static void main(String[] args) throws Exception{
+        // 先删除企业已有的回调
+        DingTalkClient client = new DefaultDingTalkClient(URLConstant.DELETE_CALLBACK);
+        OapiCallBackDeleteCallBackRequest request = new OapiCallBackDeleteCallBackRequest();
+        request.setHttpMethod("GET");
+        client.execute(request, AccessTokenUtil.getToken());
+
+        // 重新为企业注册回调
+        client = new DefaultDingTalkClient(URLConstant.REGISTER_CALLBACK);
+        OapiCallBackRegisterCallBackRequest registerRequest = new OapiCallBackRegisterCallBackRequest();
+        registerRequest.setUrl(Constant.CALLBACK_URL_HOST + "/callback");
+        registerRequest.setAesKey(Constant.ENCODING_AES_KEY);
+        registerRequest.setToken(Constant.TOKEN);
+        registerRequest.setCallBackTag(Arrays.asList("bpms_instance_change", "bpms_task_change"));
+        OapiCallBackRegisterCallBackResponse registerResponse = client.execute(registerRequest,AccessTokenUtil.getToken());
+        if (registerResponse.isSuccess()) {
+            System.out.println("回调注册成功了！！！");
+        }
     }
 }

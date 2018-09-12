@@ -37,5 +37,8 @@ public class Constant {
      */
     public static final String PROCESS_CODE = "***";
 
+    /**
+     * 回调host
+     */
     public static final String CALLBACK_URL_HOST = "***";
 }
