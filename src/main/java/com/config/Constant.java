@@ -36,4 +36,6 @@ public class Constant {
      * 审批模板唯一标识，可以在审批管理后台找到
      */
     public static final String PROCESS_CODE = "***";
+
+    public static final String CALLBACK_URL_HOST = "***";
 }
