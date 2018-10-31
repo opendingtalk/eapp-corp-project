@@ -5,14 +5,8 @@ import com.config.Constant;
 import com.config.URLConstant;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
-import com.dingtalk.api.request.OapiProcessinstanceCreateRequest;
-import com.dingtalk.api.request.OapiProcessinstanceGetRequest;
-import com.dingtalk.api.request.OapiWorkrecordAddRequest;
-import com.dingtalk.api.request.OapiWorkrecordUpdateRequest;
-import com.dingtalk.api.response.OapiProcessinstanceCreateResponse;
-import com.dingtalk.api.response.OapiProcessinstanceGetResponse;
-import com.dingtalk.api.response.OapiWorkrecordAddResponse;
-import com.dingtalk.api.response.OapiWorkrecordUpdateResponse;
+import com.dingtalk.api.request.*;
+import com.dingtalk.api.response.*;
 import com.model.ProcessInstanceInputVO;
 import com.util.AccessTokenUtil;
 import com.util.LogFormatter;
@@ -36,6 +30,7 @@ public class WorkRecordController {
 
 	/**
 	 * 发起待办事项
+	 * 文档地址：https://open-doc.dingtalk.com/microapp/serverapi2/gdzay4
 	 */
 	@RequestMapping(value = "/workrecord/start", method = RequestMethod.POST)
 	@ResponseBody
@@ -79,6 +74,7 @@ public class WorkRecordController {
 
 	/**
 	 * 发起待办事项
+	 * 文档地址： https://open-doc.dingtalk.com/microapp/serverapi2/sltmwf
 	 */
 	@RequestMapping(value = "/workrecord/{id}/update", method = RequestMethod.GET)
 	@ResponseBody
@@ -109,26 +105,25 @@ public class WorkRecordController {
 	}
 
 	/**
-	 * 根据审批实例id获取审批详情
-	 * @param instanceId
+	 * 获取待办事项
+	 * 文档地址：https://open-doc.dingtalk.com/microapp/serverapi2/ehn6bt
 	 * @return
 	 */
-	@RequestMapping(value = "/workrecord/get", method = RequestMethod.POST)
+	@RequestMapping(value = "/workrecord/get", method = RequestMethod.GET)
 	@ResponseBody
-	public ServiceResult getWorkRecordByUserId(@RequestParam String instanceId) {
+	public ServiceResult getWorkRecordByUserId() {
 		try {
-			DingTalkClient client = new DefaultDingTalkClient(URLConstant.URL_PROCESSINSTANCE_GET);
-			OapiProcessinstanceGetRequest request = new OapiProcessinstanceGetRequest();
-			request.setProcessInstanceId(instanceId);
-			OapiProcessinstanceGetResponse response = client.execute(request, AccessTokenUtil.getToken());
-			if (response.getErrcode().longValue() != 0) {
-				return ServiceResult.failure(String.valueOf(response.getErrorCode()), response.getErrmsg());
-			}
-			return ServiceResult.success(response.getProcessInstance());
+			DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/workrecord/getbyuserid");
+			OapiWorkrecordGetbyuseridRequest req = new OapiWorkrecordGetbyuseridRequest();
+			req.setUserid("manager7078");
+			req.setOffset(0L);
+			req.setLimit(50L);
+			req.setStatus(0L);
+			OapiWorkrecordGetbyuseridResponse rsp = client.execute(req, AccessTokenUtil.getToken());
+			System.out.println(rsp.getBody());
+
+			return ServiceResult.success(rsp.getRecords());
 		} catch (Exception e) {
-			String errLog = LogFormatter.getKVLogData(LogEvent.END,
-				LogFormatter.KeyValue.getNew("instanceId", instanceId));
-			bizLogger.info(errLog,e);
 			return ServiceResult.failure(ServiceResultCode.SYS_ERROR.getErrCode(),ServiceResultCode.SYS_ERROR.getErrMsg());
 		}
 	}
