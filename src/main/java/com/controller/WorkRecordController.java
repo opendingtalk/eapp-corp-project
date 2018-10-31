@@ -99,7 +99,7 @@ public class WorkRecordController {
 			if (response.getErrcode().longValue() != 0) {
 				return "update workrecord fail";
 			}
-			return "update success";
+			return "待办事项更新完成";
 
 		} catch (Exception e) {
 			String errLog = LogFormatter.getKVLogData(LogEvent.END,"updateWorkRecord fail");
