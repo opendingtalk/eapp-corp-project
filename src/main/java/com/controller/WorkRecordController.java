@@ -22,6 +22,8 @@ import java.util.*;
 /**
  * 企业 E应用审批解决方案示例代码
  * 实现了审批的基础功能
+ * 内网穿透工具地址：https://open-doc.dingtalk.com/microapp/debug/ucof2g
+ * 待办接口地址：https://open-doc.dingtalk.com/microapp/serverapi2/gdzay4
  */
 @RestController
 public class WorkRecordController {
