@@ -68,7 +68,7 @@
 			<artifactId>top-api-sdk-dev</artifactId>
 			<version>dingtalk-SNAPSHOT</version>
 			<scope>system</scope>
-			<systemPath>${pom.basedir}/lib/taobao-sdk-java-auto_1479188381469-20181025.jar</systemPath>
+			<systemPath>${pom.basedir}/lib/taobao-sdk-java-auto_1479188381469-20190227.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.taobao.top</groupId>

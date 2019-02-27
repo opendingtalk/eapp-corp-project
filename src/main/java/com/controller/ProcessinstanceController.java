@@ -54,6 +54,11 @@ public class ProcessinstanceController {
 			request.setProcessCode(Constant.PROCESS_CODE);
 
 			request.setFormComponentValues(processInstance.generateForms());
+
+			/**
+			 * 如果想复用审批固定流程，使用或签会签的话，可以不传审批人，具体请参考文档： https://open-doc.dingtalk.com/microapp/serverapi2/ebkwx8
+			 * 本次quickstart，演示不传审批人的场景
+			 */
 			request.setApprovers(processInstance.getOriginatorUserId());
 			request.setOriginatorUserId(processInstance.getOriginatorUserId());
 			request.setDeptId(processInstance.getDeptId());
